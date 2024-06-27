@@ -3,6 +3,8 @@ import React from 'react'
 import { IoIosLogOut, IoMdClose } from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
 import { IoHome, IoPeopleOutline, IoPersonAddOutline } from 'react-icons/io5'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../feature/User/UserSlice'
 
 
 type Props = {
@@ -11,13 +13,11 @@ type Props = {
 
 const SideBar = ({ setSidebarOpen }: Props) => {
 
-
-
-    // const logOutFunc = async () => {
-    //     if (logOut) {
-    //         await logOut()
-    //     }
-    // }
+    const dispatch = useDispatch();
+    const { user } = useSelector((state: any) => state.user)
+    const logOutFunc = async () => {
+        dispatch(logout())
+    }
 
 
 
@@ -31,7 +31,7 @@ const SideBar = ({ setSidebarOpen }: Props) => {
 
                 <div onClick={() => setSidebarOpen(false)} className='cursor-pointer  md:hidden text-xl pe-2'>
                     <IoMdClose className='text-gray-400' />
-                    </div>
+                </div>
             </div>
 
             {/* Middle */}
@@ -50,7 +50,7 @@ const SideBar = ({ setSidebarOpen }: Props) => {
                         </div>
                     </NavLink>
                     <NavLink onClick={() => setSidebarOpen(false)} to='/create-user' className={({ isActive }) =>
-                        isActive ?  "text-[#9066F6]" : "text-gray-500"}>
+                        isActive ? "text-[#9066F6]" : "text-gray-500"}>
 
                         <div className=' flex justify-start gap-2  text-base items-center  font-base  pt-2 mt-1'>
                             <div className='border rounded-md p-1 '>
@@ -60,7 +60,7 @@ const SideBar = ({ setSidebarOpen }: Props) => {
                         </div>
                     </NavLink>
                     <NavLink onClick={() => setSidebarOpen(false)} to='/show-users' className={({ isActive }) =>
-                        isActive ?  "text-[#9066F6]" : "text-gray-500"}>
+                        isActive ? "text-[#9066F6]" : "text-gray-500"}>
                         <div className=' flex justify-start gap-2  text-base items-center  font-base  pt-2 mt-1'>
                             <div className='border rounded-md p-1 '>
                                 <IoPeopleOutline />
@@ -81,18 +81,18 @@ const SideBar = ({ setSidebarOpen }: Props) => {
             {/* Bottom */}
             <div className="px-2 py-3 text-gray-700">
                 <div className="flex w-full gap-3 justify-between items-center text-gray-00 shadow-xl bg-white bg-opacity-10 px-2 py-2 rounded-lg border-t border-gray-500 border-opacity-50">
-                 
+
                     <div className='basis-[60%]'>
-                        <h3 className='text-xl font-medium'>userName
-                            {/* {user?.displayName!} */}
-                            </h3>
-                        <h4 className='text-sm text-gray-500 -500'>user email
-                            {/* {user?.email} */}
-                            </h4>
+                        <h3 className='text-xl font-medium'>
+                            {user?.firstName} {user?.lastName}
+                        </h3>
+                        <h4 className='text-sm text-gray-500 -500'>
+                            {user?.email}
+                        </h4>
                     </div>
                     <button className="text-white basis-[20%]" title='Log Out'
-                    //  onClick={logOutFunc}
-                     >
+                        onClick={logOutFunc}
+                    >
                         <IoIosLogOut className="w-8 h-8 text-red-500" />
                     </button>
                 </div>
