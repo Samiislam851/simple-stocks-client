@@ -21,7 +21,8 @@ const userSlice = createSlice({
             state.error = action.payload
         },
         logout: (state) => {
-            state.user = null
+            state.user = null;
+            localStorage.setItem('jwt', '')
         }
     }
 
