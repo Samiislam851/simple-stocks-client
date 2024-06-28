@@ -80,7 +80,16 @@ const SideBar = ({ setSidebarOpen }: Props) => {
 
             {/* Bottom */}
             <div className="px-2 py-3 text-gray-700">
-                <div className="flex w-full gap-3 justify-between items-center text-gray-00 shadow-xl bg-white bg-opacity-10 px-2 py-2 rounded-lg border-t border-gray-500 border-opacity-50">
+                <div className="flex w-full gap-3 justify-between items-center text-gray-00  bg-white bg-opacity-10 px-2 py-2 rounded-lg border-t border-gray-500 border-opacity-50">
+                    {user && user.photoURl ?
+                          <div
+                          style={{ backgroundImage: `url(${user?.photoURL})` }}
+                          className="w-14 h-14 bg-cover bg-center rounded-full "
+                      >
+                         
+                      </div>
+                        : null
+                    }
 
                     <div className='basis-[60%]'>
                         <h3 className='text-xl font-medium'>
