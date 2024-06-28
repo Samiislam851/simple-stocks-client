@@ -1,16 +1,26 @@
 
+import { useEffect, useState } from 'react';
+import StocksTable from '../../components/StocksTable/StocksTable'
 import './Hompage.css'
+import axios from 'axios';
 
 
-const Homepage = ( ) => {
+const Homepage = () => {
+
+  const [stocksData, setStocksData] = useState([]);
+
+
   return (
-    <div className='max-w-[54rem]  mx-5    bg-white  pt-5 p-10 rounded-lg border border-white border-opacity-10'>
-      <h3 className='md:text-4xl text-2xl font-bold text-center py-5 gradient-text'> Welcome to User-Atlas 
-        {/* {user?.displayName}! */}
-        <br /> the ultimate user management system!</h3>
-      <p className='text-gray-500 text-center text-lg'>
-        Easily register, log in, create, view, edit, and delete users with our simple REST API built on Express.js. Get started now!
+    <div className='max-w-full h-full w-full  bg-transparent pt-5 p-10 rounded-lg text-gray-700  '>
+      <h3 className='text-xl font-bold text-start pt-3 pb-1'> Welcome to Simple Stocks</h3>
+      <p className='text-gray-500 text-start text-lg'>
       </p>
+      <div>
+        {/* graph */}
+      </div>
+      <div>
+        <StocksTable />
+      </div>
     </div>
   )
 }
