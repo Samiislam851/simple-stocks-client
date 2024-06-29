@@ -51,7 +51,6 @@ export default function Login({ }: Props) {
                 onSuccess: (data) => {
                     dispatch(loginSuccess(data?.user));
                     localStorage.setItem('jwt',data?.token)
-                    localStorage.setItem('uid',data?.user?._id)
                 },
                 onError: (error: any) => {
                     dispatch(loginFailure(error.message));
@@ -68,7 +67,7 @@ export default function Login({ }: Props) {
                         <div className='w-fit mx-auto'>
                             <h3 className='text-3xl font-bold  text-gray-700'>Simple <span className='text-primary'>Stocks</span></h3>
                         </div>
-                        <h3 className='text-lg text-gray-400 font-thin md:font-thin px-5 md:px-10 mb-6'>Sign in to you account</h3>
+                        <h3 className='text-lg text-gray-400 font-thin md:font-thin px-5 md:px-10 mb-6'>Sign in to your account</h3>
                         <form className='max-w-md  px-5 md:px-10 mx-auto flex flex-col items-center justify-center gap-1 pb-5' onSubmit={handleSubmit(handleLogin)} >
                             <input {...register('email')} className='p-2 m-2 w-full rounded-lg border border-gray-300 focus:border-gray-500 focus:outline-gray-300' type="text" placeholder='Enter your Email' />
                             <div className="relative m-2 w-full rounded-lg border">

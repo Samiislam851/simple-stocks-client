@@ -20,12 +20,25 @@ const userSlice = createSlice({
             state.loading = false
             state.error = action.payload
         },
+     
+        registerStart: (state) => {
+            state.loading = true
+        },
+        registerSuccess: (state, action) => {
+            state.loading = false
+            state.user = action.payload
+        },
+        registerFailure: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
         logout: (state) => {
             state.user = null;
             localStorage.setItem('jwt', '')
-        }
+        },
+        
     }
 
 })
-export const { loginStart, loginSuccess, loginFailure, logout } = userSlice.actions
+export const { loginStart, loginSuccess, loginFailure, logout,registerStart, registerSuccess,registerFailure } = userSlice.actions
 export default userSlice.reducer;
