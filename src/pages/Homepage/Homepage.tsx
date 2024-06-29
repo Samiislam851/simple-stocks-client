@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import StocksTable from '../../components/StocksTable/StocksTable'
 import './Hompage.css'
 import axios from 'axios';
+import PrimaryChart from '../../components/PrimaryChart/PrimaryChart';
+import MarketSharePieChart from '../../components/MarketSharePieChart/MarketSharePieChart';
 
 const Homepage = () => {
 
@@ -27,12 +29,18 @@ const Homepage = () => {
       <h3 className='text-xl font-bold text-start pt-3 pb-1'> Welcome to Simple Stocks</h3>
       <p className='text-gray-500 text-start text-lg'>
       </p>
-      <div>
-        {/* graph */}
+      <div className='flex flex-col lg:flex-row gap-5 w-full'>
+        <div className='md:basis-[60%]'>
+          <PrimaryChart stocksData={stocksData} />
+        </div>
+        <div  className='md:basis-[40%]'>
+          <MarketSharePieChart />
+        </div>
       </div>
       <div>
-        <StocksTable setStocksData={setStocksData}  stocksData={stocksData} />
+        <StocksTable setStocksData={setStocksData} stocksData={stocksData} />
       </div>
+
     </div>
   )
 }

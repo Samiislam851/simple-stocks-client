@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { IoCaretBackCircleOutline, IoCaretForwardCircleOutline } from "react-icons/io5";
+import { stockDataType } from "../../types/stockData";
 
 type Props = {
-    stocksData: any[],
+    stocksData: stockDataType[ ],
     setStocksData: React.Dispatch<React.SetStateAction<any[]>>
 }
 
@@ -21,9 +22,12 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
     // Change page
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    const handleInputChange = (index: number, field: string, value: any) => {
+    const handleInputChange = (index: number, field: any, value: any) => {
         const updatedStocks = [...stocksData];
-        updatedStocks[index][field] = value;
+        updatedStocks[index] = {
+            ...updatedStocks[index],
+            [field]: value,
+        };
         setStocksData(updatedStocks);
     };
 
@@ -42,13 +46,13 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                 </div>
                 <div>
                     {currentItems.map((stock, index) => (
-                        <div key={index} className="flex border border-gray-200 hover:bg-gray-50 focus-within:border-blue-300 focus-within:bg-gray-50 transition-all ease-in-out z-10 focus-within:shadow ">
+                        <div key={index} className="flex border border-gray-200 hover:bg-gray-50 focus-within:border-primary focus-within:border-opacity-50 focus-within:bg-gray-50 transition-all ease-in-out z-10 focus-within:shadow ">
                             <div className="flex-1 px-4 py-2 text-sm text-gray-600">
                                 <input
                                     type="text"
                                     value={stock?.date}
                                     onChange={(e) => handleInputChange(indexOfFirstItem + index, 'date', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-blue-400 focus:bg-white"
+                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
                                 />
                             </div>
                             <div className="flex-1 px-4 py-2 text-sm text-gray-600">
@@ -56,7 +60,7 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                                     type="text"
                                     value={stock?.trade_code}
                                     onChange={(e) => handleInputChange(indexOfFirstItem + index, 'trade_code', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-blue-400 focus:bg-white"
+                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
                                 />
                             </div>
                             <div className="flex-1 px-4 py-2 text-sm text-gray-600">
@@ -64,7 +68,7 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                                     type="text"
                                     value={stock?.high}
                                     onChange={(e) => handleInputChange(indexOfFirstItem + index, 'high', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-blue-400 focus:bg-white"
+                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
                                 />
                             </div>
                             <div className="flex-1 px-4 py-2 text-sm text-gray-600">
@@ -72,7 +76,7 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                                     type="text"
                                     value={stock?.low}
                                     onChange={(e) => handleInputChange(indexOfFirstItem + index, 'low', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-blue-400 focus:bg-white"
+                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
                                 />
                             </div>
                             <div className="flex-1 px-4 py-2 text-sm text-gray-600">
@@ -80,7 +84,7 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                                     type="text"
                                     value={stock?.open}
                                     onChange={(e) => handleInputChange(indexOfFirstItem + index, 'open', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-blue-400 focus:bg-white"
+                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
                                 />
                             </div>
                             <div className="flex-1 px-4 py-2 text-sm text-gray-600">
@@ -88,7 +92,7 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                                     type="text"
                                     value={stock?.close}
                                     onChange={(e) => handleInputChange(indexOfFirstItem + index, 'close', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-blue-400 focus:bg-white"
+                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
                                 />
                             </div>
                             <div className="flex-1 px-4 py-2 text-sm text-gray-600">
@@ -96,7 +100,7 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                                     type="text"
                                     value={stock?.volume}
                                     onChange={(e) => handleInputChange(indexOfFirstItem + index, 'volume', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-blue-400 focus:bg-white"
+                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
                                 />
                             </div>
                         </div>
