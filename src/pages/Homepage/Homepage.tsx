@@ -10,6 +10,7 @@ const Homepage = () => {
 
   const [stocksData, setStocksData] = useState<any>([]);
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
