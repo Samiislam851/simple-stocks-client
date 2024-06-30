@@ -18,7 +18,6 @@ type inputObject = {
 
 export default function Login({ }: Props) {
     const [showPassword, setShowPassword] = useState(false);
-    const [errMsg, setErrMsg] = useState('')
     const { register, handleSubmit } = useForm<inputObject>();
     const dispatch = useDispatch()
     const { loading, error, user } = useSelector((state: any) => state.user)
