@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import StocksTable from '../../components/StocksTable/StocksTable'
 import './Hompage.css'
-import axios from 'axios';
 import PrimaryChart from '../../components/PrimaryChart/PrimaryChart';
 import MarketSharePieChart from '../../components/MarketSharePieChart/MarketSharePieChart';
 

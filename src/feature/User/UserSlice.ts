@@ -11,6 +11,7 @@ const userSlice = createSlice({
     reducers: {
         loginStart: (state) => {
             state.loading = true
+            state.error = null
         },
         loginSuccess: (state, action) => {
             state.loading = false
@@ -34,7 +35,7 @@ const userSlice = createSlice({
         },
         logout: (state) => {
             state.user = null;
-            localStorage.setItem('jwt', '')
+            localStorage.removeItem('jwt')
         },
         
     }

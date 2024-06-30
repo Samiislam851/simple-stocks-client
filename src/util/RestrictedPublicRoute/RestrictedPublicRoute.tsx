@@ -10,7 +10,7 @@ type props = {
 
 
 const RestrictedPublicRoute = ({ children }: props) => {
-    const { user, loading } = useSelector((select: any) => select.user)
+    const { user } = useSelector((select: any) => select.user)
     return (
         <>
             {user ? <><Navigate to='/' /></> : <>{children}</>}

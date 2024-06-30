@@ -3,13 +3,12 @@ import { useState } from 'react'
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from 'react-hot-toast';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../../feature/User/UserSlice';
 import useUserLoginMutation from '../../hooks/useUserLogin';
-
+import Swal from 'sweetalert2'
 type Props = {}
 type inputObject = {
     email: string,
@@ -18,21 +17,15 @@ type inputObject = {
 
 
 export default function Login({ }: Props) {
-
-
     const [showPassword, setShowPassword] = useState(false);
-    // const { setUser, logOut, emailSignIn, setLoggedIn, setLoading, setToken } = useAuth()!
-    const { register, handleSubmit } = useForm<inputObject>()
-
+    const [errMsg, setErrMsg] = useState('')
+    const { register, handleSubmit } = useForm<inputObject>();
     const dispatch = useDispatch()
     const { loading, error, user } = useSelector((state: any) => state.user)
-
     const mutation = useUserLoginMutation();
-
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);
     };
-
 
     console.log('loading state', loading);
     console.log('error', error);
@@ -47,13 +40,22 @@ export default function Login({ }: Props) {
                 userEmail: data.email,
                 password: data.password
             }
+            dispatch(loginStart())
             mutation.mutateAsync(dataToSend, {
                 onSuccess: (data) => {
                     dispatch(loginSuccess(data?.user));
-                    localStorage.setItem('jwt',data?.token)
+                    localStorage.setItem('jwt', data?.token)
                 },
                 onError: (error: any) => {
-                    dispatch(loginFailure(error.message));
+                    console.log('errror form onError', error);
+                    dispatch(loginFailure(error.response.data.message));
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "Error while logging in",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
                 },
             })
         }
@@ -85,7 +87,8 @@ export default function Login({ }: Props) {
                                     {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
                                 </button>
                             </div>
-                            <button className='border py-2 mt-3 w-full rounded-lg bg-[#924fdf] text-white hover:shadow-xl transition-all ease-in-out duration-300 border-0'>
+                            {error ? <div className='text-red-500'>{error}</div> : null}
+                            <button className=' py-2 mt-3 w-full rounded-lg bg-[#924fdf] text-white hover:shadow-xl transition-all ease-in-out duration-300 border-0'>
                                 {loading ?
                                     <div className='flex gap-2 animate-pulse items-center justify-center mx-auto'>
                                         <div>Login</div>
