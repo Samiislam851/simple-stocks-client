@@ -108,14 +108,14 @@ Optimizing data fetching and rendering for large datasets and improving overall 
 - jsonModel : https://simple-stocks-crud.netlify.app/
 - CRUDModel : https://simple-stocks-json.netlify.app/
 
-## Server Repository link
-
-- Server: https://github.com/Samiislam851/basic-stocks-server
-
 ## Login credentials
 
 #### userEmail : samisiam852@gmail.com
 
 #### password : 123456
 
-or you can create your own ID with register
+or you can create your own ID in register page
+
+## Server Repository link
+
+- Server: https://github.com/Samiislam851/basic-stocks-server
