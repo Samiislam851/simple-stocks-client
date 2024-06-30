@@ -6,4 +6,5 @@ export type stockDataType =  {
   open: string
   close: string
   volume: string
+  _id:string
 }

@@ -1,36 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoCaretBackCircleOutline, IoCaretForwardCircleOutline } from "react-icons/io5";
 import { stockDataType } from "../../types/stockData";
+import StocksTableRow from "../StockTableRow/StocksTableRow";
+import { useSelector } from "react-redux";
+import ShimmerUI from "../ui/StockTable/ShimmerUI";
 
 type Props = {
-    stocksData: stockDataType[ ],
-    setStocksData: React.Dispatch<React.SetStateAction<any[]>>
+
 }
 
-const StocksTable = ({ stocksData, setStocksData }: Props) => {
-
+const StocksTable = ({ }: Props) => {
+    const { stocksData } = useSelector((state: any) => state.stocks)
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentItems, setCurrentItems] = useState<stockDataType[] | null>(null);
     const itemsPerPage = 10;
-    const totalPages = Math.ceil(stocksData.length / itemsPerPage);
-    // get first and last items
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const demoArr = new Array(10).fill(undefined)
+    console.log('asdgasfbafdba',demoArr);
+    
 
-    //get current items
-    const currentItems = stocksData.slice(indexOfFirstItem, indexOfLastItem);
-
-    // Change page
+    useEffect(() => {
+        if (stocksData) {
+            setTotalPages(Math.ceil(stocksData.length / itemsPerPage));
+            const indexOfLastItem = currentPage * itemsPerPage;
+            const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+            setCurrentItems(stocksData.slice(indexOfFirstItem, indexOfLastItem));
+        }
+    }, [stocksData, currentPage]);
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-    const handleInputChange = (index: number, field: any, value: any) => {
-        const updatedStocks = [...stocksData];
-        updatedStocks[index] = {
-            ...updatedStocks[index],
-            [field]: value,
-        };
-        setStocksData(updatedStocks);
-    };
-
     return (
         <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-xl mb-5">
             <h3 className="text-2xl font-bold  pb-3">Stocks Table</h3>
@@ -43,70 +40,22 @@ const StocksTable = ({ stocksData, setStocksData }: Props) => {
                     <div className="flex-1 px-4 py-2 text-left text-sm font-semibold text-gray-600">Open</div>
                     <div className="flex-1 px-4 py-2 text-left text-sm font-semibold text-gray-600">Close</div>
                     <div className="flex-1 px-4 py-2 text-left text-sm font-semibold text-gray-600">Volume</div>
+                    <div className="flex-1 px-4 py-2 text-left text-sm font-semibold text-gray-600">Actions</div>
                 </div>
-                <div>
-                    {currentItems.map((stock, index) => (
-                        <div key={index} className="flex border border-gray-200 hover:bg-gray-50 focus-within:border-primary focus-within:border-opacity-50 focus-within:bg-gray-50 transition-all ease-in-out z-10 focus-within:shadow ">
-                            <div className="flex-1 px-4 py-2 text-sm text-gray-600">
-                                <input
-                                    type="text"
-                                    value={stock?.date}
-                                    onChange={(e) => handleInputChange(indexOfFirstItem + index, 'date', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
-                                />
-                            </div>
-                            <div className="flex-1 px-4 py-2 text-sm text-gray-600">
-                                <input
-                                    type="text"
-                                    value={stock?.trade_code}
-                                    onChange={(e) => handleInputChange(indexOfFirstItem + index, 'trade_code', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
-                                />
-                            </div>
-                            <div className="flex-1 px-4 py-2 text-sm text-gray-600">
-                                <input
-                                    type="text"
-                                    value={stock?.high}
-                                    onChange={(e) => handleInputChange(indexOfFirstItem + index, 'high', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
-                                />
-                            </div>
-                            <div className="flex-1 px-4 py-2 text-sm text-gray-600">
-                                <input
-                                    type="text"
-                                    value={stock?.low}
-                                    onChange={(e) => handleInputChange(indexOfFirstItem + index, 'low', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
-                                />
-                            </div>
-                            <div className="flex-1 px-4 py-2 text-sm text-gray-600">
-                                <input
-                                    type="text"
-                                    value={stock?.open}
-                                    onChange={(e) => handleInputChange(indexOfFirstItem + index, 'open', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
-                                />
-                            </div>
-                            <div className="flex-1 px-4 py-2 text-sm text-gray-600">
-                                <input
-                                    type="text"
-                                    value={stock?.close}
-                                    onChange={(e) => handleInputChange(indexOfFirstItem + index, 'close', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
-                                />
-                            </div>
-                            <div className="flex-1 px-4 py-2 text-sm text-gray-600">
-                                <input
-                                    type="text"
-                                    value={stock?.volume}
-                                    onChange={(e) => handleInputChange(indexOfFirstItem + index, 'volume', e.target.value)}
-                                    className="w-full px-2 py-1 bg-transparent border border-transparent rounded focus:outline-none focus:border-primary focus:border-opacity-70 focus:bg-white"
-                                />
-                            </div>
+                {stocksData?  <div>
+                    {currentItems?.map((stock, index) => (
+                        <div key={index} >
+                            <StocksTableRow stock={stock} />
                         </div>
-
                     ))}
+                </div>:
+                <div>
+                    {demoArr.map(()=> <ShimmerUI/>  )
+                        
+                    }
                 </div>
+                }
+              
             </div>
             <div className="flex justify-end items-center  gap-4 mt-4">
                 <button

@@ -17,13 +17,9 @@ const useUserRegisterMutation = () => {
             password: userData.password,
             photoURL: userData.photoURL
         };
-        try {
             console.log('bodyData', bodyData);
-            const response = await customAxios.post('/signup', bodyData);
-            return response.data;
-        } catch (error) {
-            console.log('error while reg >>>', error);
-        }
+           return  await customAxios.post('/signup', bodyData);
+        
     };
 
     return useMutation<any, any, any, any>({ mutationFn });

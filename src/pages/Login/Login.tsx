@@ -8,7 +8,9 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../../feature/User/UserSlice';
-import useUserLoginMutation from '../../hooks/useUserLogin';
+import { useMutation } from '@tanstack/react-query';
+import { userLoginDataType } from '../../types/user';
+import customAxios from '../../util/axiosInstance/axiosInstance';
 
 type Props = {}
 type inputObject = {
@@ -23,11 +25,17 @@ export default function Login({ }: Props) {
     const [showPassword, setShowPassword] = useState(false);
     // const { setUser, logOut, emailSignIn, setLoggedIn, setLoading, setToken } = useAuth()!
     const { register, handleSubmit } = useForm<inputObject>()
-
     const dispatch = useDispatch()
     const { loading, error, user } = useSelector((state: any) => state.user)
-
-    const mutation = useUserLoginMutation();
+    console.log('loading', loading, 'error', error, 'user', user);
+    const mutationFn = async (userData: userLoginDataType) => {
+        const bodyData = {
+            email: userData.userEmail,
+            password: userData.password,
+        };
+        return await customAxios.post('/login', bodyData);
+    };
+    const mutation = useMutation<any, any, any, any>({ mutationFn });
 
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);
@@ -47,12 +55,14 @@ export default function Login({ }: Props) {
                 userEmail: data.email,
                 password: data.password
             }
+            dispatch(loginStart());
             mutation.mutateAsync(dataToSend, {
                 onSuccess: (data) => {
                     dispatch(loginSuccess(data?.user));
-                    localStorage.setItem('jwt',data?.token)
+                    localStorage.setItem('jwt', data?.token)
                 },
                 onError: (error: any) => {
+                    console.log('error===>', error);
                     dispatch(loginFailure(error.message));
                 },
             })
@@ -85,6 +95,12 @@ export default function Login({ }: Props) {
                                     {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
                                 </button>
                             </div>
+                            {error ?
+
+                                <div className='py-2 text-red-500'>
+                                    {error.message}
+                                </div>
+                                : null}
                             <button className='border py-2 mt-3 w-full rounded-lg bg-[#924fdf] text-white hover:shadow-xl transition-all ease-in-out duration-300 border-0'>
                                 {loading ?
                                     <div className='flex gap-2 animate-pulse items-center justify-center mx-auto'>
