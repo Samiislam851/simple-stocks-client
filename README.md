@@ -26,7 +26,7 @@ This project implements a CRUD (Create, Read, Update, Delete) web application us
 - Pie Chart: For whole market share details
 
 ## Image preview
-![Alt text]([image-url-or-path](https://ibb.co/zfQ8dPv))
+![Alt text]([image-url-or-path]([https://ibb.co/zfQ8dPv](https://i.ibb.co/F7msp8T/simple-stocks.png)))
 
 ## Tech Stack
 
