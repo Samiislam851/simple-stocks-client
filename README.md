@@ -38,8 +38,12 @@ This project implements a CRUD (Create, Read, Update, Delete) web application us
 
 #### Backend:
 
-- Node (ExpressJS) with MongoDB Server
-  REST API for CRUD operations
+ - Node (Express-TS)
+ - MongoDB
+ - Mongoose 
+ - Bcrypt
+ - JWT
+
 
 ## Deployment:
 
