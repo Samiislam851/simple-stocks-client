@@ -104,7 +104,7 @@ Adding user authorization for role based data access.
 Optimizing data fetching and rendering for large datasets and improving overall application performance.
 
 ## Live link
-
+```` Warnin! The server is deployed on Render's free tier it may take time for initial response````
 - jsonModel : https://simple-stocks-crud.netlify.app/
 - CRUDModel : https://simple-stocks-json.netlify.app/
 
