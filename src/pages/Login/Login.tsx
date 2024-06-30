@@ -43,7 +43,9 @@ export default function Login({ }: Props) {
             dispatch(loginStart())
             mutation.mutateAsync(dataToSend, {
                 onSuccess: (data) => {
-                    dispatch(loginSuccess(data?.user));
+                    console.log('data===>',data);
+                    
+                    dispatch(loginSuccess(data?.data?.user));
                     localStorage.setItem('jwt', data?.token)
                 },
                 onError: (error: any) => {
