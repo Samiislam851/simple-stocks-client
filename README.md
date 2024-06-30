@@ -25,6 +25,9 @@ This project implements a CRUD (Create, Read, Update, Delete) web application us
 - Bar Chart: Accompanies the line chart by visualizing the 'volume' column over time.
 - Pie Chart: For whole market share details
 
+## Image preview
+![Alt text]([image-url-or-path](https://ibb.co/zfQ8dPv))
+
 ## Tech Stack
 
 #### Frontend:
