@@ -1,6 +1,6 @@
 # JanataWiFi Task - Stock Data CRUD Web App
 
-This project implements a CRUD (Create, Read, Update, Delete) web application using ReactJS for the frontend and Python with SQL Server for the backend. It includes features such as displaying stock data in a table, editing table rows, and visualizing data with line and bar charts using Recharts.
+This project implements a CRUD (Create, Read, Update, Delete) web application using ReactJS for the frontend and NodeJS Server for the backend. It includes features such as displaying stock data in a table, editing table rows, and visualizing data with line and bar charts using Recharts.
 
 ## Table of Contents
 
