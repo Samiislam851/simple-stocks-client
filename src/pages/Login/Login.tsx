@@ -3,11 +3,10 @@ import { useState } from 'react'
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from 'react-hot-toast';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginFailure, loginStart, loginSuccess } from '../../feature/User/UserSlice';
+import { loginStart, loginSuccess } from '../../feature/User/UserSlice';
 import { useMutation } from '@tanstack/react-query';
 import { userLoginDataType } from '../../types/user';
 import customAxios from '../../util/axiosInstance/axiosInstance';
@@ -72,7 +71,7 @@ export default function Login({ }: Props) {
                     dispatch(loginSuccess(data?.user));
                     localStorage.setItem('jwt', data?.token)
                 },
-                onError: (error: any) => {
+                onError: () => {
                   
                 },
             })
@@ -111,7 +110,7 @@ export default function Login({ }: Props) {
                                     {error.message}
                                 </div>
                                 : null}
-                            <button className='border py-2 mt-3 w-full rounded-lg bg-[#924fdf] text-white hover:shadow-xl transition-all ease-in-out duration-300 border-0'>
+                            <button className=' py-2 mt-3 w-full rounded-lg bg-[#924fdf] text-white hover:shadow-xl transition-all ease-in-out duration-300 border-0'>
                                 {loading ?
                                     <div className='flex gap-2 animate-pulse items-center justify-center mx-auto'>
                                         <div>Login</div>

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { stockDataType } from '../../types/stockData'
 import { FaRegEdit } from "react-icons/fa";
 

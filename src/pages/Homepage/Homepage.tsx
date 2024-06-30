@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import StocksTable from '../../components/StocksTable/StocksTable'
 import './Hompage.css'
 import PrimaryChart from '../../components/PrimaryChart/PrimaryChart';
@@ -18,7 +18,7 @@ const Homepage = () => {
     console.log('res===>', res);
     return res.data.data
   }
-  const { data, error, isLoading } = useQuery<stockDataType[]>({
+  const { data, isLoading } = useQuery<stockDataType[]>({
     queryKey: ['stocksData'],
     queryFn: getStocksData,
   })

@@ -1,4 +1,3 @@
-import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 const MarketSharePieChart = () => {
@@ -51,13 +50,14 @@ const MarketSharePieChart = () => {
                                 dataKey="percentage"
                             >
                                 {
+                                    // @ts-ignore
                                     data.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}
                                         />
                                     ))
                                 }
                             </Pie>
-                            <Tooltip content={CustomTooltip} formatter={(value, name, props) => `${name} : ${value}%`} />
+                            <Tooltip content={CustomTooltip} formatter={(value, name) => `${name} : ${value}%`} />
                         </PieChart>
                     </ResponsiveContainer>
                 </div>

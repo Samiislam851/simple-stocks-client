@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
+
 import { stockDataType } from '../types/stockData';
 import customAxios from '../util/axiosInstance/axiosInstance';
 

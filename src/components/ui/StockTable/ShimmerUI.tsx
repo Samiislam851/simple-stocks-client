@@ -1,8 +1,5 @@
-import React from 'react'
 
-type Props = {}
-
-const ShimmerUI = (props: Props) => {
+const ShimmerUI = () => {
     return (
         <div className="flex w-full">
         <div className="flex-1 px-4 py-2 text-sm text-gray-600">

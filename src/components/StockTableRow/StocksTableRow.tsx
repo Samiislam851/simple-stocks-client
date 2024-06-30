@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 import { stockDataType } from '../../types/stockData';
 import { IoIosSave, IoMdClose } from 'react-icons/io';
@@ -38,7 +38,7 @@ const StocksTableRow = ({ stock }: Props) => {
 
     const handleSave = () => {
         saveMutation.mutate(currentState, {
-            onSuccess(data, variables, context) {
+            onSuccess(data) {
                 console.log('success data', data);
                 const otherStocks = stocksData.filter((stck: stockDataType) => stck._id !== currentState._id)
                 const newStocks = [...otherStocks, currentState]
@@ -52,7 +52,7 @@ const StocksTableRow = ({ stock }: Props) => {
                 });
                 setIsEditing(false)
             },
-            onError(error, variables, context) {
+            onError() {
                 console.log('error');
                 Swal.fire({
                     position: "top-end",
@@ -70,7 +70,7 @@ const StocksTableRow = ({ stock }: Props) => {
         console.log('deleting with Id>>>', currentState._id);
 
         deleteMutation.mutate(currentState._id, {
-            onSuccess(data, variables, context) {
+            onSuccess( ) {
                 const otherStocks = stocksData.filter((stck: stockDataType) => stck._id !== currentState._id)
                 dispatch(updateStocks(otherStocks))
                 Swal.fire({
@@ -82,7 +82,7 @@ const StocksTableRow = ({ stock }: Props) => {
                 });
                 setIsEditing(false)
             },
-            onError(error, variables, context) {
+            onError() {
                 console.log('error');
                 Swal.fire({
                     position: "top-end",
