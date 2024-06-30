@@ -11,6 +11,7 @@ import { loginFailure, loginStart, loginSuccess } from '../../feature/User/UserS
 import { useMutation } from '@tanstack/react-query';
 import { userLoginDataType } from '../../types/user';
 import customAxios from '../../util/axiosInstance/axiosInstance';
+import Swal from 'sweetalert2';
 
 type Props = {}
 type inputObject = {
@@ -33,7 +34,21 @@ export default function Login({ }: Props) {
             email: userData.userEmail,
             password: userData.password,
         };
-        return await customAxios.post('/login', bodyData);
+        try {
+            const res = await customAxios.post('/login', bodyData);
+            return res.data
+        } catch (error: any) {
+            Swal.fire(
+                {
+                    icon: 'error',
+                    position: "top-end",
+                    title: "Error logging in",
+                    showConfirmButton: false,
+                    timer: 1500
+                }
+            )
+        }
+
     };
     const mutation = useMutation<any, any, any, any>({ mutationFn });
 
@@ -41,10 +56,6 @@ export default function Login({ }: Props) {
         setShowPassword(prevState => !prevState);
     };
 
-
-    console.log('loading state', loading);
-    console.log('error', error);
-    console.log('user', user);
 
 
     const handleLogin = (data: inputObject) => {
@@ -62,8 +73,7 @@ export default function Login({ }: Props) {
                     localStorage.setItem('jwt', data?.token)
                 },
                 onError: (error: any) => {
-                    console.log('error===>', error);
-                    dispatch(loginFailure(error.message));
+                  
                 },
             })
         }
