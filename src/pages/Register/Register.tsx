@@ -45,8 +45,9 @@ const RegisterPage = ({ }: Props) => {
 
         mutation.mutateAsync(userData, {
             onSuccess: (data) => {
-                dispatch(registerSuccess(data?.user));
-                localStorage.setItem('jwt', data?.token);
+                console.log('data',data);
+                dispatch(registerSuccess(data?.data?.user));
+                localStorage.setItem('jwt', data?.data?.token);
                 setIsLoading(false);
             },
             onError: (error: any) => {
