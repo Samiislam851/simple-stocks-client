@@ -41,12 +41,12 @@ This project implements a CRUD (Create, Read, Update, Delete) web application us
 
 #### Backend:
 
- - Node (Express-TS)
+ - Node
+ - Express-TS
  - MongoDB
  - Mongoose 
  - Bcrypt
  - JWT
-
 
 ## Deployment:
 
